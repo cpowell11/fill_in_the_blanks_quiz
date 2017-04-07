@@ -1,0 +1,104 @@
+levels = {'easy':
+    """In the movie, Snow White and the seven ___1___, 
+    Snow White gets poisoned by eating an ___2___.""",
+    'medium':
+     """The song, "Let It Go", is featured in the Disney movie ___1___ 
+    by a character named ___2___.""",
+    'hard':
+        """With a total of only ___1___ whole lines, 
+        Princess Aurora is the Disney Princess with the least amount of dialogue in the movie ___2___ Beauty."""}
+
+answers = {'easy': [['Dwarves', 'dwarves', 'dwarfs','Dwarfs'],
+                    ['apple', 'Apple','poisoned apple','Poisoned Apple']],
+          'medium': [['Frozen', 'frozen'],
+                    ['Elsa']],
+          'hard': [['18', 'eighteen'],
+            ['sleeping', 'Sleeping']]}
+
+"""This sets the difficulty of the quiz"""
+def setdifficulty():
+    global difficulty
+    print ("Ready for a challenge?")
+    difficulty= raw_input("Enter easy, medium, or hard:  ")
+    while difficulty not in quizes:
+        difficulty = raw_input("Please choose [easy, medium, hard]: ")
+    print ("This quiz will be " + difficulty + " difficulty.")
+
+""" Sets the number of attempts the player gets per question. """
+def setattempts():
+    global attempts
+    attempts = raw_input("How many attempts would you like per question?")
+    while not attempts.isdigit() or int(attempts) < 1:
+        attempts = raw_input("Please pick a number:  ")
+    attempts = int(attempts)
+    print ("")
+
+def checkanswer(possible, guess):
+    for answer in possible:
+        if guess.lower() == answer.lower():
+            return True
+    return False
+
+
+continue = True
+attempts, difficulty = 1, 'easy'
+
+
+def answerquestion(index, quiz):
+    global continue
+    answer = answers[difficulty][index]
+
+    while attempts > 0:
+        guess = raw_input("What goes in ___%s___: " % str(index+1))
+        if checkanswer(answer, guess):
+            print ("Correct! \n")
+            print ('-' * 20)
+            quiz = quiz.replace('___%s___' % str(index+1), guess)
+            print (quiz)
+            print ('-' * 20 + '\n')
+            break
+
+        elif attempts > 1:
+            print ("That is incorrect. Try again.")
+            attempts += -1
+            print (attempts + "attempt(s) left. \n")
+        else:
+            alive = False
+            break
+    return quiz
+
+
+"""Allows the user to play the quiz"""
+def takequiz():   
+    global continue
+    continue = True
+
+    print ('\n' + "* " * 10)
+    print ("Welcome to the quiz.\n")
+
+    setdifficulty()
+
+    quiz = quizes[difficulty]
+
+    setattempts()
+
+    print ("Start:")
+    print ("=" * 20)
+    print (quiz)
+    print ("=" * 20 + '\n')
+
+    for index in xrange(len(answers[difficulty])):
+        quiz = answerquestion(index, quiz)
+        if not alive: break
+
+    if continue:
+        print ("Great job!\n" % difficulty)
+    else:
+        print ("Game over!")
+    return continue
+    while True:
+        takequiz()
+
+        if raw_input("Play again? (yes or no)  ") not in ['yes', 'y']:
+            print ("Thanks for playing.  Good-bye! \n")
+            break
