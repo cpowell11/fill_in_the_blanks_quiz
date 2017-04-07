@@ -31,7 +31,7 @@ def setattempts():
     while not attempts.isdigit() or int(attempts) < 1:
         attempts = raw_input("Please pick a number:  ")
     attempts = int(attempts)
-    print ("")
+
 
 def checkanswer(possible, guess):
     for answer in possible:
@@ -90,5 +90,5 @@ def takequiz():
         takequiz()
 
         if raw_input("Play again? (yes or no)  ") not in ['yes', 'y']:
-            print ("Thanks for playing.  Good-bye!")
+        print ("Thanks for playing.  Good-bye!")
             break
