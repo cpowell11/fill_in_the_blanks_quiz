@@ -11,9 +11,9 @@ levels = {'easy':
 answers = {'easy': [['Dwarves', 'dwarves', 'dwarfs','Dwarfs'],
                     ['apple', 'Apple','poisoned apple','Poisoned Apple']],
           'medium': [['Frozen', 'frozen'],
-                    ['Elsa']],
-          'hard': [['18', 'eighteen'],
-            ['sleeping', 'Sleeping']]}
+                    ['Elsa']],          
+            'hard': [['18', 'eighteen'],
+                    ['sleeping', 'Sleeping']]}
 
 """This sets the difficulty of the quiz"""
 def setdifficulty():
@@ -23,7 +23,7 @@ def setdifficulty():
     while difficulty not in quizes:
         difficulty = raw_input("Please choose [easy, medium, hard]: ")
     print ("This quiz will be " + difficulty + " difficulty.")
-
+    
 """ Sets the number of attempts the player gets per question. """
 def setattempts():
     global attempts
@@ -52,9 +52,9 @@ def answerquestion(index, quiz):
             break
 
         elif attempts > 1:
-            print ("That is incorrect. Try again.")
+            print ("Try again.")
             attempts += -1
-            print (attempts + "attempt(s) left. \n")
+            print (attempts + "attempt(s) left.")
         else:
             next = False
             break
@@ -66,7 +66,7 @@ def takequiz():
     global next
     next = True
 
-    print ("Welcome to the quiz.")
+    print ("Welcome to a Fill In the Blanks Quiz about Disney!)
 
     setdifficulty()
 
