@@ -1,9 +1,9 @@
 levels = {'easy':
-    """In the movie, Snow White and the seven ___1___, 
-    Snow White gets poisoned by eating an ___2___.""",
+        """In the movie, Snow White and the seven ___1___, 
+        Snow White gets poisoned by eating an ___2___.""",
     'medium':
-     """The song, "Let It Go", is featured in the Disney movie ___1___ 
-    by a character named ___2___.""",
+        """The song, "Let It Go", is featured in the Disney movie ___1___ 
+         by a character named ___2___.""",
     'hard':
         """With a total of only ___1___ whole lines, 
         Princess Aurora is the Disney Princess with the least amount of dialogue in the movie ___2___ Beauty."""}
@@ -14,6 +14,9 @@ answers = {'easy': [['Dwarves', 'dwarves', 'dwarfs','Dwarfs'],
                     ['Elsa']],
           'hard': [['18', 'eighteen'],
             ['sleeping', 'Sleeping']]}
+
+next = True
+attempts, difficulty = 1, 'easy'
 
 """This sets the difficulty of the quiz"""
 def setdifficulty():
@@ -39,13 +42,8 @@ def checkanswer(possible, guess):
             return True
     return False
 
-
-continue = True
-attempts, difficulty = 1, 'easy'
-
-
 def answerquestion(index, quiz):
-    global continue
+    global next
     answer = answers[difficulty][index]
 
     while attempts > 0:
@@ -63,15 +61,15 @@ def answerquestion(index, quiz):
             attempts += -1
             print (attempts + "attempt(s) left. \n")
         else:
-            alive = False
+            next = False
             break
     return quiz
 
 
 """Allows the user to play the quiz"""
 def takequiz():   
-    global continue
-    continue = True
+    global next
+    next = True
 
     print ('\n' + "* " * 10)
     print ("Welcome to the quiz.\n")
@@ -89,13 +87,13 @@ def takequiz():
 
     for index in xrange(len(answers[difficulty])):
         quiz = answerquestion(index, quiz)
-        if not alive: break
+        if not next: break
 
-    if continue:
+    if next:
         print ("Great job!\n" % difficulty)
     else:
         print ("Game over!")
-    return continue
+    return next
     while True:
         takequiz()
 
