@@ -15,9 +15,6 @@ answers = {'easy': [['Dwarves', 'dwarves', 'dwarfs','Dwarfs'],
           'hard': [['18', 'eighteen'],
             ['sleeping', 'Sleeping']]}
 
-next = True
-attempts, difficulty = 1, 'easy'
-
 """This sets the difficulty of the quiz"""
 def setdifficulty():
     global difficulty
@@ -50,10 +47,8 @@ def answerquestion(index, quiz):
         guess = raw_input("What goes in ___%s___: " % str(index+1))
         if checkanswer(answer, guess):
             print ("Correct! \n")
-            print ('-' * 20)
             quiz = quiz.replace('___%s___' % str(index+1), guess)
             print (quiz)
-            print ('-' * 20 + '\n')
             break
 
         elif attempts > 1:
@@ -71,8 +66,7 @@ def takequiz():
     global next
     next = True
 
-    print ('\n' + "* " * 10)
-    print ("Welcome to the quiz.\n")
+    print ("Welcome to the quiz.")
 
     setdifficulty()
 
@@ -81,16 +75,14 @@ def takequiz():
     setattempts()
 
     print ("Start:")
-    print ("=" * 20)
     print (quiz)
-    print ("=" * 20 + '\n')
 
     for index in xrange(len(answers[difficulty])):
         quiz = answerquestion(index, quiz)
         if not next: break
 
     if next:
-        print ("Great job!\n" % difficulty)
+        print ("Great job!)
     else:
         print ("Game over!")
     return next
@@ -98,5 +90,5 @@ def takequiz():
         takequiz()
 
         if raw_input("Play again? (yes or no)  ") not in ['yes', 'y']:
-            print ("Thanks for playing.  Good-bye! \n")
+            print ("Thanks for playing.  Good-bye!")
             break
